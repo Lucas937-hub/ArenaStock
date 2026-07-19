@@ -1,0 +1,298 @@
+/* ==========================================================
+   PERFIL
+   ========================================================== */
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.page-header{
+
+    margin-bottom:28px;
+
+}
+
+.page-header h1{
+
+    font-size:1.55rem;
+
+    letter-spacing:-.03em;
+
+}
+
+.page-header p{
+
+    margin-top:6px;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   CABEÇALHO DO PERFIL
+   ========================================================== */
+
+.profile-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    margin-bottom:26px;
+
+}
+
+.profile-summary{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.profile-summary h2{
+
+    font-size:1.5rem;
+
+    font-weight:600;
+
+    letter-spacing:-.02em;
+
+}
+
+.profile-summary p{
+
+    color:var(--text2);
+
+    font-size:.92rem;
+
+}
+
+.profile-role{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:max-content;
+
+    padding:4px 12px;
+
+    border-radius:20px;
+
+    background:var(--rust-lt);
+
+    color:var(--rust);
+
+    font-size:.78rem;
+
+    font-weight:600;
+
+    letter-spacing:.02em;
+
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+.avatar-lg{
+
+    width:90px;
+
+    height:90px;
+
+    font-size:2rem;
+
+    border:2px solid var(--border2);
+
+    background:var(--surface2);
+
+    flex-shrink:0;
+
+}
+
+
+/* ==========================================================
+   CARDS
+   ========================================================== */
+
+.card{
+
+    margin-bottom:22px;
+
+}
+
+.card h3{
+
+    margin-bottom:20px;
+
+    font-size:1rem;
+
+}
+
+
+/* ==========================================================
+   CAMPOS
+   ========================================================== */
+
+.profile-field{
+
+    padding:14px 0;
+
+}
+
+.field-label{
+
+    margin-bottom:4px;
+
+}
+
+.field-value{
+
+    color:var(--text);
+
+    font-size:.92rem;
+
+}
+
+/* ==========================================================
+   BOTÕES
+   ========================================================== */
+
+.profile-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:28px;
+
+}
+
+.profile-actions .btn{
+
+    min-width:170px;
+
+}
+
+
+/* ==========================================================
+   HOVER DOS CARDS
+   ========================================================== */
+
+.card{
+
+    transition:
+
+        transform .15s ease,
+
+        box-shadow .18s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+
+}
+
+
+/* ==========================================================
+   ANIMAÇÃO
+   ========================================================== */
+
+.profile-header{
+
+    animation:fadeProfile .25s ease;
+
+}
+
+@keyframes fadeProfile{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:768px){
+
+    .profile-header{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .profile-summary{
+
+        align-items:center;
+
+    }
+
+    .profile-actions{
+
+        flex-direction:column;
+
+    }
+
+    .profile-actions .btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media (max-width:640px){
+
+    .avatar-lg{
+
+        width:72px;
+
+        height:72px;
+
+        font-size:1.6rem;
+
+    }
+
+    .page-header h1{
+
+        font-size:1.35rem;
+
+    }
+
+}

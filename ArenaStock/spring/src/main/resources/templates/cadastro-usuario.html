@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Criar Conta</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/cadastro-usuario.css">
+
+</head>
+
+<body>
+
+    <main class="cadastro-page">
+
+        <section class="cadastro-card">
+
+            <!-- Logo -->
+
+            <div class="cadastro-brand">
+
+                <div class="logo-mark">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2.2">
+
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                        <path d="M2 17l10 5 10-5"/>
+
+                        <path d="M2 12l10 5 10-5"/>
+
+                    </svg>
+
+                </div>
+
+                <span class="brand-name">
+
+                    ArenaStock
+
+                </span>
+
+            </div>
+
+            <!-- Cabeçalho -->
+
+            <div class="cadastro-header">
+
+                <h1>Criar conta</h1>
+
+                <p>
+
+                    Preencha os dados abaixo para criar sua conta.
+
+                </p>
+
+            </div>
+
+            <p th:if="${param.erro}"
+               style="color:#e5484d;margin-bottom:16px;">
+
+                Não foi possível criar a conta. Verifique se o usuário ou e-mail já estão em uso.
+
+            </p>
+
+            <!-- Formulário -->
+
+            <form th:action="@{/cadastro-usuario}"
+                    th:object="${usuario}"
+                    method="post">
+
+                <div class="form-row">
+
+                    <div class="input-group">
+
+                        <label for="nome">
+
+                            Nome
+
+                        </label>
+
+                        <input
+                            id="nome"
+                            th:field="*{nome}"
+                            type="text"
+                            class="input-field"
+                            placeholder="Seu nome"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="usuario">
+
+                            Usuário
+
+                        </label>
+
+                        <input
+                            id="usuario"
+                            th:field="*{login}"
+                            type="text"
+                            class="input-field"
+                            placeholder="Seu usuário"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="email">
+
+                        E-mail
+
+                    </label>
+
+                    <input
+                        id="email"
+                        th:field="*{email}"
+                        type="email"
+                        class="input-field"
+                        placeholder="email@exemplo.com"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="senha">
+
+                        Senha
+
+                    </label>
+
+                    <input
+                        id="senha"
+                        th:field="*{senha}"
+                        type="password"
+                        class="input-field"
+                        placeholder="Mínimo de 8 caracteres"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="cargo">
+
+                        Cargo
+
+                    </label>
+
+                    <select
+                        id="cargo"
+                        th:field="*{cargo}"
+                        class="input-field"
+                        required>
+
+                        <option value="" selected disabled>
+
+                            Selecione o cargo
+
+                        </option>
+
+                        <option value="ADMINISTRADOR">
+
+                            Administrador
+
+                        </option>
+
+                        <option value="GERENTE">
+
+                            Gerente
+
+                        </option>
+
+                        <option value="ESTOQUISTA">
+
+                            Estoquista
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-block">
+
+                    Criar conta
+
+                </button>
+
+            </form>
+
+            <!-- Rodapé -->
+
+            <div class="cadastro-footer">
+
+                Já possui uma conta?
+
+                <a th:href="@{/login}">
+
+                    Entrar
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

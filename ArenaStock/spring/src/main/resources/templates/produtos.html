@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Produtos</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/dashboard-layout.css">
+
+    <link rel="stylesheet" href="/css/produtos.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR                               -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="sidebar-brand">
+
+                <a th:href="@{/dashboard}">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                            <path d="M2 17l10 5 10-5"/>
+
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">
+
+                        ArenaStock
+
+                    </span>
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-section-label">
+
+                    Principal
+
+                </div>
+
+                <a class="sidebar-link"
+                   th:href="@{/dashboard}">
+
+                    <span class="icon">🏠</span>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a class="sidebar-link active"
+                   th:href="@{/produtos}">
+
+                    <span class="icon">📦</span>
+
+                    <span>Produtos</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/categorias}">
+
+                    <span class="icon">🗂️</span>
+
+                    <span>Categorias</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/movimentacoes}">
+
+                    <span class="icon">🔄</span>
+
+                    <span>Movimentações</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/perfil}">
+
+                    <span class="icon">👤</span>
+
+                    <span>Perfil</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a class="sidebar-link sidebar-logout"
+               th:href="@{/logout}">
+
+                <span class="icon">🚪</span>
+
+                <span>Sair</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- CONTEÚDO PRINCIPAL                    -->
+    <!-- ===================================== -->
+
+    <div class="main-area">
+
+        <!-- ===================================== -->
+        <!-- TOPBAR                                -->
+        <!-- ===================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+
+                Controle de
+
+                <strong>Produtos</strong>
+
+            </div>
+
+            <div class="topbar-search">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+
+                    <circle cx="11"
+                            cy="11"
+                            r="8"/>
+
+                    <line x1="21"
+                          y1="21"
+                          x2="16.65"
+                          y2="16.65"/>
+
+                </svg>
+
+                <input
+                        class="input-field"
+                        type="text"
+                        placeholder="Pesquisar produtos...">
+
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar-circle"
+     th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+</div>
+
+                <span
+th:text="${usuarioLogado.nome}">
+</span>
+
+            </div>
+
+        </header>
+
+        <!-- ===================================== -->
+        <!-- CONTEÚDO DA PÁGINA                    -->
+        <!-- ===================================== -->
+
+        <main class="content">
+
+<!-- ===================================== -->
+<!-- HEADER DA PÁGINA -->
+<!-- ===================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Produtos</h1>
+
+        <p>
+
+            Gerencie todos os produtos cadastrados no sistema.
+
+        </p>
+
+    </div>
+
+    <button
+    id="abrirModal"
+    class="btn btn-primary">
+
+    + Novo Produto
+
+</button>
+</div>
+
+
+<!-- ===================================== -->
+<!-- TOOLBAR -->
+<!-- ===================================== -->
+
+<div class="toolbar">
+
+    <input
+            class="input-field"
+            type="text"
+            placeholder="Pesquisar produto...">
+
+   <select
+   id="categoriaProduto"
+   name="categoria"
+            class="input-field">
+
+    <option>Selecione...</option>
+
+    <option
+        th:each="categoria : ${categorias}"
+        th:value="${categoria.id}"
+        th:text="${categoria.nome}">
+    </option>
+
+</select>
+
+    <select class="input-field">
+
+        <option>Todos os status</option>
+
+        <option>Normal</option>
+
+        <option>Estoque Baixo</option>
+
+        <option>Sem Estoque</option>
+
+    </select>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- TABELA -->
+<!-- ===================================== -->
+
+<div class="table-wrapper">
+
+    <table class="data-table">
+
+        <thead>
+
+        <tr>
+
+            <th>Produto</th>
+
+            <th>Categoria</th>
+
+            <th>Estoque</th>
+
+            <th>Preço</th>
+
+            <th>Responsável</th>
+
+            <th>Status</th>
+
+            <th>Ações</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="produto : ${produtos}">
+
+            <td th:text="${produto.nome}"></td>
+
+            <td th:text="${produto.categoria.nome}"></td>
+
+            <td th:text="${produto.quantidade}"></td>
+
+            <td th:text="${'R$ ' + produto.preco}"></td>
+
+            <td th:text="${produto.usuario.nome}"></td>
+
+            <td>
+
+                <span
+    class="badge"
+    th:classappend="${produto.quantidade == 0} ? ' badge-saida'
+                    : (${produto.quantidade <= 5}
+                    ? ' badge-baixo'
+                    : ' badge-entrada')"
+
+    th:text="${produto.quantidade == 0}
+             ? 'Sem Estoque'
+             : (${produto.quantidade <= 5}
+             ? 'Baixo'
+             : 'Normal')">
+
+</span>
+
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+        type="button"
+        class="icon-btn editarProduto"
+
+        th:data-id="${produto.id}"
+        th:data-nome="${produto.nome}"
+        th:data-quantidade="${produto.quantidade}"
+        th:data-preco="${produto.preco}"
+        th:data-categoria="${produto.categoria.id}">
+
+    ✏️
+
+</button>
+
+                    <button
+                        type="button"
+                        class="icon-btn danger btn-excluir"
+                        th:data-id="${produto.id}">
+
+                        🗑️
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- ===================================== -->
+<!-- MODAL NOVO PRODUTO -->
+<!-- ===================================== -->
+
+<div
+    id="modalProduto"
+    class="modal-overlay"
+    style="display:none;">
+
+    <div class="modal-box card">
+
+        <h3 id="tituloModal">
+
+    Novo Produto
+
+</h3>
+
+      <form
+        id="formProduto"
+        th:action="@{/produtos}"
+        th:object="${produto}"
+        method="post">
+
+        <input
+        type="hidden"
+        id="produtoId">
+
+            <div class="input-group">
+
+                <label>Nome do Produto</label>
+
+                <input
+                        id="nomeProduto"
+                         type="text"
+        class="input-field"
+        placeholder="Digite o nome do produto"
+        th:field="*{nome}">
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-group">
+
+                    <label>Categoria</label>
+
+                    <select
+                        id="categoria"
+                        class="input-field"
+                        th:field="*{categoria}">
+
+                        <option value="">Selecione...</option>
+
+                        <option
+                                th:each="categoria : ${categorias}"
+                                th:value="${categoria.id}"
+                                th:text="${categoria.nome}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Quantidade</label>
+
+                    <input
+                    id="quantidadeProduto"
+                    type="number"
+        class="input-field"
+        placeholder="0"
+        th:field="*{quantidade}">
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <span
+                class="user-name"
+                th:text="${usuarioLogado.nome}">
+                </span>
+
+                <small
+                th:text="${usuarioLogado.cargo}">
+                </small>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-group">
+
+                    <label>Preço</label>
+
+                    <input
+                    id="precoProduto"
+                            type="number"
+        step="0.01"
+        class="input-field"
+        placeholder="0,00"
+        th:field="*{preco}">
+
+                </div>
+
+                <div class="input-group">
+
+
+                    <input
+                            type="text"
+                            class="input-field"
+                            placeholder="Código interno">
+
+                </div>
+
+            </div>
+
+            <div class="input-group">
+
+
+                <textarea
+                        class="input-field"
+                        rows="4"
+                        placeholder="Descrição do produto"></textarea>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+        id="fecharModal"
+        type="button"
+        class="btn btn-secondary">
+
+                Cancelar
+            </button>
+
+                <button
+        id="btnSalvar"
+        type="submit"
+        class="btn btn-primary">
+
+    Salvar Produto
+
+</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</main>
+
+<!-- ===================================== -->
+<!-- FOOTER -->
+<!-- ===================================== -->
+
+<footer class="app-footer">
+
+    ArenaStock © 2026
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+
+// Botao que abre o modal de "Novo Produto"
+const abrir = document.getElementById("abrirModal");
+// Botao que fecha o modal (Cancelar)
+const fechar = document.getElementById("fecharModal");
+// A caixa (overlay) do modal inteiro
+const modal = document.getElementById("modalProduto");
+// O formulario dentro do modal
+const form = document.getElementById("formProduto");
+
+// Campo escondido que guarda o id do produto sendo editado
+const produtoId = document.getElementById("produtoId");
+// Campo de texto do nome do produto
+const nomeProduto = document.getElementById("nomeProduto");
+// Select da categoria (id gerado pelo Thymeleaf via th:field="*{categoria}")
+const categoriaProduto = document.getElementById("categoria");
+// Campo numerico da quantidade
+const quantidadeProduto = document.getElementById("quantidadeProduto");
+// Campo numerico do preco
+const precoProduto = document.getElementById("precoProduto");
+
+// Titulo do modal (muda entre "Novo Produto" e "Editar Produto")
+const tituloModal = document.getElementById("tituloModal");
+// Texto do botao de salvar (muda conforme o modo)
+const botaoSalvar = document.getElementById("btnSalvar");
+
+// Quando clica em "Novo Produto"...
+abrir.addEventListener("click", () => {
+
+    // Limpa todos os campos do formulario
+    form.reset();
+
+    // Garante que nao ha id de edicao pendente
+    produtoId.value = "";
+
+    // Ajusta o titulo do modal pro modo de criacao
+    tituloModal.innerText = "Novo Produto";
+
+    // Ajusta o texto do botao pro modo de criacao
+    botaoSalvar.innerText = "Salvar Produto";
+
+    // Formulario vai ser enviado pra rota de cadastro
+    form.action = "/produtos";
+    // Mostra o modal na tela
+    modal.style.display = "flex";
+});
+
+// Quando clica em "Cancelar"...
+fechar.addEventListener("click", () => {
+    // Esconde o modal
+    modal.style.display = "none";
+
+    // Limpa o formulario
+    form.reset();
+
+    // Limpa o id de edicao
+    produtoId.value = "";
+});
+
+// Quando clica em qualquer lugar da pagina...
+window.addEventListener("click", function(event){
+
+    // Se o clique foi fora da caixa do modal (no fundo escurecido)...
+    if(event.target === modal){
+
+        // Esconde o modal
+        modal.style.display = "none";
+
+        // Limpa o formulario
+        form.reset();
+
+        // Limpa o id de edicao
+        produtoId.value = "";
+
+    }
+
+});
+
+// Pega todos os botoes de "editar" de cada linha da tabela
+const botoesEditar = document.querySelectorAll(".editarProduto");
+
+// Para cada botao de editar encontrado...
+botoesEditar.forEach(botao => {
+
+    // Quando aquele botao especifico for clicado...
+    botao.addEventListener("click", function () {
+        // Le os dados guardados no data-* daquele botao/linha
+        const id = this.dataset.id;
+        const nome = this.dataset.nome;
+        const categoria = this.dataset.categoria;
+        const quantidade = this.dataset.quantidade;
+        const preco = this.dataset.preco;
+
+        // Preenche o formulario do modal com os dados daquele produto
+        produtoId.value = id;
+        nomeProduto.value = nome;
+        categoriaProduto.value = categoria;
+        quantidadeProduto.value = quantidade;
+        precoProduto.value = preco;
+
+        // Ajusta o titulo do modal pro modo de edicao
+        tituloModal.innerText = "Editar Produto";
+
+        // Ajusta o texto do botao pro modo de edicao
+        botaoSalvar.innerText = "Salvar Alterações";
+
+        // Formulario vai ser enviado pra rota de edicao, com o id no final da URL
+        form.action = "/produtos/editar/" + id;
+
+        // Mostra o modal ja preenchido
+        modal.style.display = "flex";
+    });
+
+});
+
+// Excluir produto
+// Pega todos os botoes de lixeira da tabela
+document.querySelectorAll(".btn-excluir").forEach(botao => {
+
+    // Quando aquele botao especifico for clicado...
+    botao.addEventListener("click", function () {
+
+        // Le o id do produto guardado no data-id daquele botao
+        const id = this.dataset.id;
+
+        // Pede confirmacao antes de excluir de verdade
+        if (confirm("Deseja realmente excluir este produto? O histórico de movimentações dele também será apagado.")) {
+
+            // Chama a API REST pra apagar o produto (metodo DELETE)
+            fetch("/api/produtos/" + id, { method: "DELETE" })
+                .then(resposta => {
+                    // Se deu certo, recarrega a pagina pra atualizar a tabela
+                    if (resposta.ok) {
+                        window.location.reload();
+                    } else {
+                        // Se nao deu certo, avisa o usuario
+                        alert("Não foi possível excluir o produto.");
+                    }
+                });
+        }
+    });
+
+});
+
+// Pesquisar produto pelo nome (filtra a tabela já carregada na página)
+// Pega o campo de texto de pesquisa da toolbar
+const campoPesquisa = document.querySelector(".toolbar input[type='text']");
+
+// So continua se o campo realmente existir na pagina
+if (campoPesquisa) {
+
+    // Toda vez que o usuario digita algo no campo de pesquisa...
+    campoPesquisa.addEventListener("input", function () {
+
+        // Pega o texto digitado, tudo em minusculo (pra busca nao ligar pra maiuscula)
+        const termo = this.value.toLowerCase();
+
+        // Para cada linha da tabela...
+        document.querySelectorAll(".data-table tbody tr").forEach(linha => {
+
+            // Pega a primeira coluna da linha (nome do produto)
+            const nomeCelula = linha.querySelector("td");
+            const nomeTexto = nomeCelula ? nomeCelula.textContent.toLowerCase() : "";
+
+            // Mostra a linha se o nome contem o termo digitado, senao esconde
+            linha.style.display = nomeTexto.includes(termo) ? "" : "none";
+        });
+    });
+}
+
+</script>
+
+</body>
+
+</html>

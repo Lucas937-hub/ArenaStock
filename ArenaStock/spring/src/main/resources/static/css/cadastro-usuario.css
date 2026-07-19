@@ -1,0 +1,193 @@
+/* ==========================================================
+   CADASTRO DE USUÁRIO
+   Página de Cadastro - ArenaStock
+   ========================================================== */
+
+
+/* ==========================================================
+   LAYOUT DA PÁGINA
+   ========================================================== */
+
+.cadastro-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:24px;
+
+}
+
+
+/* ==========================================================
+   CARD PRINCIPAL
+   ========================================================== */
+
+.cadastro-card{
+
+    width:460px;
+
+    max-width:100%;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--r-lg);
+
+    padding:36px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* ==========================================================
+   LOGO
+   ========================================================== */
+
+.cadastro-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:28px;
+
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+   ========================================================== */
+
+.cadastro-header{
+
+    margin-bottom:26px;
+
+}
+
+.cadastro-header h1{
+
+    margin-bottom:6px;
+
+    font-size:1.30rem;
+
+}
+
+.cadastro-header p{
+
+    font-size:.85rem;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+   ========================================================== */
+
+#cadastroForm{
+
+    width:100%;
+
+}
+
+#cadastroForm .btn{
+
+    margin-top:10px;
+
+}
+
+
+/* ==========================================================
+   RODAPÉ
+   ========================================================== */
+
+.cadastro-footer{
+
+    margin-top:22px;
+
+    text-align:center;
+
+    color:var(--text2);
+
+    font-size:.84rem;
+
+}
+
+.cadastro-footer a{
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================================
+   EFEITOS
+   ========================================================== */
+
+.cadastro-card{
+
+    transition:transform var(--t),
+               box-shadow var(--t);
+
+}
+
+.cadastro-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 28px rgba(0,0,0,.35);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:640px){
+
+    .cadastro-page{
+
+        padding:16px;
+
+    }
+
+    .cadastro-card{
+
+        padding:28px 22px;
+
+    }
+
+    .cadastro-header{
+
+        text-align:center;
+
+    }
+
+    .cadastro-brand{
+
+        justify-content:center;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .cadastro-card{
+
+        padding:22px 18px;
+
+    }
+
+}

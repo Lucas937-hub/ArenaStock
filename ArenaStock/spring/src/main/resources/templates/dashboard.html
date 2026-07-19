@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Dashboard</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet"
+          th:href="@{/css/global.css}">
+
+    <!-- LAYOUT (SIDEBAR + TOPBAR) -->
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard-layout.css}">
+
+    <!-- CSS ESPECÍFICO DO DASHBOARD -->
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard.css}">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="sidebar-brand">
+
+                <a th:href="@{/dashboard}">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">ArenaStock</span>
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-section-label">Principal</div>
+
+                <a class="sidebar-link active"
+                   th:href="@{/dashboard}">
+
+                    <span class="icon">🏠</span>
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/produtos}">
+
+                    <span class="icon">📦</span>
+                    <span>Produtos</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/categorias}">
+
+                    <span class="icon">🗂️</span>
+                    <span>Categorias</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/movimentacoes}">
+
+                    <span class="icon">🔄</span>
+                    <span>Movimentações</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/perfil}">
+
+                    <span class="icon">👤</span>
+                    <span>Perfil</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a class="sidebar-link sidebar-logout"
+               th:href="@{/logout}">
+
+                <span class="icon">🚪</span>
+                <span>Sair</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- ÁREA PRINCIPAL -->
+    <!-- ===================================== -->
+
+    <div class="main-area">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-title">
+
+                Dashboard
+
+                <strong>ArenaStock</strong>
+
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar-circle"
+                th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+            </div>
+
+                <span class="user-name"
+      th:text="${usuarioLogado.nome}">
+    Usuário
+</span>
+
+    <span class="user-role"
+      th:text="${usuarioLogado.cargo}">
+    </span>
+
+            </div>
+
+        </header>
+
+        <!-- CONTEÚDO -->
+        <main class="content">
+
+            <!-- ===================================== -->
+            <!-- CABEÇALHO -->
+            <!-- ===================================== -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Bem-vindo,
+                        <strong th:text="${usuarioLogado.nome}"></strong>.
+                    </p>
+
+                </div>
+
+                <button class="btn btn-primary">
+                    + Nova Movimentação
+                </button>
+
+            </div>
+
+            <!-- CARDS -->
+            <section class="dashboard-cards">
+
+                <div class="dashboard-card">
+                    <span class="card-title">Produtos</span>
+                    <h2 th:text="${totalProdutos}"></h2>
+                    <span class="card-info">Produtos cadastrados</span>
+                </div>
+
+                <div class="dashboard-card">
+                    <span class="card-title">Categorias</span>
+                    <h2 th:text="${totalCategorias}"></h2>
+                    <span class="card-info">Categorias ativas</span>
+                </div>
+
+                <div class="dashboard-card success">
+                    <span class="card-title">Entradas</span>
+                    <h2 th:text="${totalEntradas}"></h2>
+                    <span class="card-info">Este mês</span>
+                </div>
+
+                <div class="dashboard-card danger">
+                    <span class="card-title">Saídas</span>
+                    <h2 th:text="${totalSaidas}"></h2>
+                    <span class="card-info">Este mês</span>
+                </div>
+
+            </section>
+
+            <!-- GRID -->
+            <section class="dashboard-grid">
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+                        <h3>Produtos com estoque baixo</h3>
+                    </div>
+
+                    <table class="data-table">
+
+                        <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr th:each="produto : ${produtosBaixos}">
+
+                            <td th:text="${produto.nome}"></td>
+
+                            <td>
+
+                                <span class="badge badge-baixo"
+                                    th:text="${produto.quantidade}"></span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(produtosBaixos)}">
+
+                            <td colspan="2">
+
+                                Nenhum produto com estoque baixo.
+
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+                        <h3>Últimas movimentações</h3>
+                    </div>
+
+                    <table class="data-table">
+
+                        <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Produto</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr th:each="mov : ${ultimasMovimentacoes}">
+
+                            <td>
+
+                                <span
+                                    th:classappend="${mov.tipo.name() == 'ENTRADA'} ?
+                                    'badge badge-entrada' :
+                                    'badge badge-saida'"
+
+                                    th:text="${mov.tipo}">
+                                </span>
+
+                            </td>
+
+                            <td th:text="${mov.produto.nome}"></td>
+
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(ultimasMovimentacoes)}">
+
+                            <td colspan="2">
+
+                                Nenhuma movimentação cadastrada.
+
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            <!-- RESUMO -->
+            <section class="dashboard-summary">
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+                        <h3>Resumo Geral</h3>
+                    </div>
+
+                    <p>
+
+                    O ArenaStock possui atualmente
+
+                    <strong th:text="${totalProdutos}"></strong>
+
+                    produtos distribuídos em
+
+                    <strong th:text="${totalCategorias}"></strong>
+
+                    categorias.
+
+                    Neste período ocorreram
+
+                    <strong th:text="${totalEntradas}"></strong>
+
+                    entradas e
+
+                    <strong th:text="${totalSaidas}"></strong>
+
+                    saídas de estoque.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- GRÁFICO -->
+            <section class="dashboard-chart">
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+                        <h3>Movimentações Mensais</h3>
+                    </div>
+
+                    <div class="chart-placeholder">
+                        Área reservada para gráfico.
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            ArenaStock © 2026
+        </footer>
+
+    </div>
+
+</div>
+
+</body>
+</html>

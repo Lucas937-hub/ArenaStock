@@ -1,0 +1,498 @@
+/* ==========================================================
+   MOVIMENTAÇÕES
+   ========================================================== */
+
+
+/* ==========================================================
+   HEADER DA PÁGINA
+   ========================================================== */
+
+.page-header{
+
+    margin-bottom:26px;
+
+}
+
+.page-header h1{
+
+    font-size:1.55rem;
+
+    letter-spacing:-.03em;
+
+}
+
+.page-header p{
+
+    margin-top:6px;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   BOTÃO NOVA MOVIMENTAÇÃO
+   ========================================================== */
+
+.page-header .btn{
+
+    min-width:210px;
+
+    justify-content:center;
+
+}
+
+
+/* ==========================================================
+   TOOLBAR
+   ========================================================== */
+
+.toolbar{
+
+    margin-bottom:22px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.toolbar input[type="text"]{
+
+    width:280px;
+
+}
+
+.toolbar select{
+
+    width:200px;
+
+}
+
+.toolbar input[type="date"]{
+
+    width:180px;
+
+}
+
+
+/* ==========================================================
+   TABELA
+   ========================================================== */
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+.data-table{
+
+    min-width:980px;
+
+}
+
+
+/* ==========================================================
+   COLUNAS
+   ========================================================== */
+
+.data-table th:nth-child(1),
+.data-table td:nth-child(1){
+
+    width:260px;
+
+}
+
+.data-table th:nth-child(2),
+.data-table td:nth-child(2){
+
+    width:140px;
+
+    text-align:center;
+
+}
+
+.data-table th:nth-child(3),
+.data-table td:nth-child(3){
+
+    width:130px;
+
+    text-align:center;
+
+}
+
+.data-table th:nth-child(4),
+.data-table td:nth-child(4){
+
+    width:180px;
+
+}
+
+.data-table th:nth-child(5),
+.data-table td:nth-child(5){
+
+    width:150px;
+
+}
+
+.data-table th:nth-child(6),
+.data-table td:nth-child(6){
+
+    width:120px;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================
+   PRODUTO
+   ========================================================== */
+
+.data-table tbody td:first-child{
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+
+/* ==========================================================
+   QUANTIDADE
+   ========================================================== */
+
+.data-table tbody td:nth-child(3){
+
+    font-family:var(--mono);
+
+    font-weight:700;
+
+}
+
+
+/* Quantidades positivas */
+
+.quantidade-entrada{
+
+    color:var(--green);
+
+}
+
+
+/* Quantidades negativas */
+
+.quantidade-saida{
+
+    color:var(--red);
+
+}
+
+
+/* ==========================================================
+   BADGES
+   ========================================================== */
+
+.badge{
+
+    min-width:90px;
+
+    justify-content:center;
+
+}
+
+
+/* ==========================================================
+   AÇÕES
+   ========================================================== */
+
+.actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:8px;
+
+}
+
+.actions .icon-btn{
+
+    transition:all var(--t);
+
+}
+
+.actions .icon-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================================================
+   MODAL
+   ========================================================== */
+
+.modal-box{
+
+    width:520px;
+
+    max-width:92%;
+
+}
+
+.modal-box h3{
+
+    margin-bottom:24px;
+
+}
+
+.modal-box textarea{
+
+    min-height:110px;
+
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+   ========================================================== */
+
+.modal-box .form-row{
+
+    margin-bottom:8px;
+
+}
+
+.modal-box .btn{
+
+    min-width:170px;
+
+}
+
+
+/* ==========================================================
+   BOTÕES
+   ========================================================== */
+
+.form-actions{
+
+    margin-top:24px;
+
+}
+
+.form-actions .btn{
+
+    justify-content:center;
+
+}
+
+
+/* ==========================================================
+   TABELA
+   ========================================================== */
+
+.data-table tbody tr{
+
+    transition:
+
+        background .15s ease,
+
+        transform .10s ease;
+
+}
+
+.data-table tbody tr:hover{
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.data-table tbody td{
+
+    vertical-align:middle;
+
+}
+
+
+/* ==========================================================
+   BADGES
+   ========================================================== */
+
+.badge{
+
+    font-weight:600;
+
+    letter-spacing:.02em;
+
+}
+
+
+/* ==========================================================
+   QUANTIDADE
+   ========================================================== */
+
+.quantidade-entrada{
+
+    color:var(--green);
+
+}
+
+.quantidade-saida{
+
+    color:var(--red);
+
+}
+
+
+/* ==========================================================
+   BOTÕES DE AÇÃO
+   ========================================================== */
+
+.icon-btn{
+
+    width:32px;
+
+    height:32px;
+
+}
+
+.icon-btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+/* ==========================================================
+   ESTADO VAZIO
+   ========================================================== */
+
+.empty-state{
+
+    padding:70px 30px;
+
+}
+
+.empty-state h3{
+
+    margin-bottom:10px;
+
+    font-size:1.15rem;
+
+}
+
+.empty-state p{
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   ANIMAÇÃO DO MODAL
+   ========================================================== */
+
+.modal-box{
+
+    animation:modalFade .18s ease;
+
+}
+
+@keyframes modalFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:900px){
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .toolbar input,
+
+    .toolbar select{
+
+        width:100%;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+    .page-header .btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media (max-width:640px){
+
+    .modal-box{
+
+        width:95%;
+
+    }
+
+    .modal-box .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .form-actions{
+
+        flex-direction:column;
+
+    }
+
+    .form-actions .btn{
+
+        width:100%;
+
+    }
+
+    .data-table{
+
+        min-width:760px;
+
+    }
+
+}

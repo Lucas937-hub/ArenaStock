@@ -1,0 +1,442 @@
+/* ==========================================================
+   DASHBOARD LAYOUT
+   Estrutura das páginas autenticadas
+   ========================================================== */
+
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+   ========================================================== */
+
+.dashboard-layout{
+
+    min-height:100vh;
+
+    display:flex;
+
+    background:var(--bg);
+
+}
+
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+.sidebar{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+
+/* ==========================================================
+   LOGO
+   ========================================================== */
+
+.sidebar-brand{
+
+    user-select:none;
+
+}
+
+.sidebar-brand a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:inherit;
+
+}
+
+.sidebar-brand a:hover{
+
+    color:inherit;
+
+}
+
+
+/* ==========================================================
+   MENU
+   ========================================================== */
+
+.sidebar-nav{
+
+    flex:1;
+
+    margin-top:18px;
+
+}
+
+.sidebar-section{
+
+    margin-bottom:24px;
+
+}
+
+
+/* ==========================================================
+   LINKS
+   ========================================================== */
+
+.sidebar-link{
+
+    position:relative;
+
+}
+
+.sidebar-link::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:8px;
+
+    bottom:8px;
+
+    width:3px;
+
+    border-radius:20px;
+
+    background:transparent;
+
+    transition:all var(--t);
+
+}
+
+.sidebar-link.active::before{
+
+    background:var(--rust);
+
+}
+
+.sidebar-link svg{
+
+    transition:all var(--t);
+
+}
+
+.sidebar-link:hover svg{
+
+    transform:scale(1.08);
+
+}
+
+
+/* ==========================================================
+   RODAPÉ DA SIDEBAR
+   ========================================================== */
+
+.sidebar-footer{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+/* ==========================================================
+   PERFIL DO USUÁRIO
+   ========================================================== */
+
+.sidebar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px;
+
+    margin-bottom:14px;
+
+    border-radius:var(--r-md);
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+}
+
+.sidebar-user-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+}
+
+.sidebar-user-name{
+
+    color:var(--text);
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.sidebar-user-role{
+
+    color:var(--muted);
+
+    font-size:.75rem;
+
+}
+
+/* ==========================================================
+   ÁREA PRINCIPAL
+   ========================================================== */
+
+.main-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+/* ==========================================================
+   TOPBAR
+   ========================================================== */
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+/* ==========================================================
+   LADO ESQUERDO DA TOPBAR
+   ========================================================== */
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+
+/* ==========================================================
+   LADO DIREITO DA TOPBAR
+   ========================================================== */
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+
+/* ==========================================================
+   PESQUISA
+   ========================================================== */
+
+.topbar-search{
+
+    min-width:260px;
+
+}
+
+
+/* ==========================================================
+   USUÁRIO
+   ========================================================== */
+
+.topbar-user{
+
+    cursor:pointer;
+
+    transition:all var(--t);
+
+}
+
+.topbar-user:hover{
+
+    opacity:.85;
+
+}
+
+
+/* ==========================================================
+   CONTEÚDO
+   ========================================================== */
+
+.content{
+
+    flex:1;
+
+}
+
+
+/* ==========================================================
+   CABEÇALHO DAS PÁGINAS
+   ========================================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.page-header-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.page-header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+/* ==========================================================
+   RODAPÉ
+   ========================================================== */
+
+.app-footer{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:1024px){
+
+    .topbar{
+
+        gap:12px;
+
+    }
+
+    .topbar-search{
+
+        min-width:180px;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .topbar-left,
+
+    .topbar-right{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .page-header-right{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+    }
+
+}
+
+
+@media (max-width:640px){
+
+    .topbar-search{
+
+        display:none;
+
+    }
+
+    .app-footer{
+
+        flex-direction:column;
+
+        gap:8px;
+
+        text-align:center;
+
+    }
+
+}

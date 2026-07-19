@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Perfil</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/dashboard-layout.css">
+
+    <link rel="stylesheet" href="/css/perfil.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="sidebar-brand">
+
+                <a th:href="@{/dashboard}">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                            <path d="M2 17l10 5 10-5"/>
+
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">
+
+                        ArenaStock
+
+                    </span>
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-section-label">
+
+                    Principal
+
+                </div>
+
+                <a class="sidebar-link"
+                   th:href="@{/dashboard}">
+
+                    <span class="icon">🏠</span>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/produtos}">
+
+                    <span class="icon">📦</span>
+
+                    <span>Produtos</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/categorias}">
+
+                    <span class="icon">🗂️</span>
+
+                    <span>Categorias</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/movimentacoes}">
+
+                    <span class="icon">🔄</span>
+
+                    <span>Movimentações</span>
+
+                </a>
+
+                <a class="sidebar-link active"
+                   th:href="@{/perfil}">
+
+                    <span class="icon">👤</span>
+
+                    <span>Perfil</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a class="sidebar-link sidebar-logout"
+               th:href="@{/logout}">
+
+                <span class="icon">🚪</span>
+
+                <span>Sair</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ===================================== -->
+
+    <div class="main-area">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+
+                Perfil do
+
+                <strong>Usuário</strong>
+
+            </div>
+
+            <div class="topbar-search">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+
+                    <circle cx="11"
+                            cy="11"
+                            r="8"/>
+
+                    <line x1="21"
+                          y1="21"
+                          x2="16.65"
+                          y2="16.65"/>
+
+                </svg>
+
+                <input
+                        class="input-field"
+                        type="text"
+                        placeholder="Pesquisar...">
+
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar-circle"
+                     th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+                </div>
+
+                <span class="user-name"
+                      th:text="${usuarioLogado.nome}">
+
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- CONTEÚDO -->
+
+        <main class="content">
+
+ <!-- ===================================== -->
+<!-- HEADER DA PÁGINA -->
+<!-- ===================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Meu Perfil</h1>
+
+        <p>
+
+            Visualize suas informações pessoais e dados da conta.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- CABEÇALHO DO PERFIL -->
+<!-- ===================================== -->
+
+<div class="profile-header card">
+
+    <div class="avatar-circle avatar-lg"
+         th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+    </div>
+
+    <div class="profile-summary">
+
+        <h2 th:text="${usuarioLogado.nome}"></h2>
+
+        <p th:text="${'@' + usuarioLogado.login}"></p>
+
+        <span class="profile-role"
+              th:text="${usuarioLogado.cargo}">
+
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- INFORMAÇÕES PESSOAIS -->
+<!-- ===================================== -->
+
+<div class="card">
+
+    <h3>
+
+        Informações Pessoais
+
+    </h3>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            Nome
+
+        </div>
+
+        <div class="field-value"
+             th:text="${usuarioLogado.nome}">
+
+        </div>
+
+    </div>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            Usuário
+
+        </div>
+
+        <div class="field-value"
+             th:text="${usuarioLogado.login}">
+
+        </div>
+
+    </div>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            E-mail
+
+        </div>
+
+        <div class="field-value"
+             th:text="${usuarioLogado.email}">
+
+        </div>
+
+    </div>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            Cargo
+
+        </div>
+
+        <div class="field-value"
+             th:text="${usuarioLogado.cargo}">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<br>
+
+
+<!-- ===================================== -->
+<!-- SEGURANÇA -->
+<!-- ===================================== -->
+
+<div class="card">
+
+    <h3>
+
+        Segurança
+
+    </h3>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            Senha
+
+        </div>
+
+        <div class="field-value">
+
+            ••••••••••••
+
+        </div>
+
+    </div>
+
+    <div class="profile-field">
+
+        <div class="field-label">
+
+            Último acesso
+
+        </div>
+
+        <div class="field-value">
+
+            Hoje às 10:42
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<br>
+
+
+<!-- ===================================== -->
+<!-- BOTÕES -->
+<!-- ===================================== -->
+
+<div class="profile-actions">
+
+    <button class="btn btn-primary">
+
+        Editar Perfil
+
+    </button>
+
+    <button class="btn btn-secondary">
+
+        Alterar Senha
+
+    </button>
+
+</div>
+
+<!-- ===================================== -->
+<!-- FOOTER -->
+<!-- ===================================== -->
+
+</main>
+
+<footer class="app-footer">
+
+    ArenaStock © 2026
+
+</footer>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

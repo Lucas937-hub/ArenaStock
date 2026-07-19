@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Categorias</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/dashboard-layout.css">
+
+    <link rel="stylesheet" href="/css/categorias.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="sidebar-brand">
+
+                <a th:href="@{/dashboard}">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                            <path d="M2 17l10 5 10-5"/>
+
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">
+
+                        ArenaStock
+
+                    </span>
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-section-label">
+
+                    Principal
+
+                </div>
+
+                <a class="sidebar-link"
+                   th:href="@{/dashboard}">
+
+                    <span class="icon">🏠</span>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/produtos}">
+
+                    <span class="icon">📦</span>
+
+                    <span>Produtos</span>
+
+                </a>
+
+                <a class="sidebar-link active"
+                   th:href="@{/categorias}">
+
+                    <span class="icon">🗂️</span>
+
+                    <span>Categorias</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/movimentacoes}">
+
+                    <span class="icon">🔄</span>
+
+                    <span>Movimentações</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/perfil}">
+
+                    <span class="icon">👤</span>
+
+                    <span>Perfil</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a class="sidebar-link sidebar-logout"
+               th:href="@{/logout}">
+
+                <span class="icon">🚪</span>
+
+                <span>Sair</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ===================================== -->
+
+    <div class="main-area">
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+
+                Controle de
+
+                <strong>Categorias</strong>
+
+            </div>
+
+            <div class="topbar-search">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+
+                    <circle cx="11"
+                            cy="11"
+                            r="8"/>
+
+                    <line x1="21"
+                          y1="21"
+                          x2="16.65"
+                          y2="16.65"/>
+
+                </svg>
+
+                <input
+                        class="input-field"
+                        type="text"
+                        placeholder="Pesquisar categorias...">
+
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar-circle"
+                     th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+                </div>
+
+                <span class="user-name"
+                      th:text="${usuarioLogado.nome}">
+
+                </span>
+
+            </div>
+
+        </header>
+
+        <main class="content">
+
+            <!-- ===================================== -->
+<!-- HEADER DA PÁGINA -->
+<!-- ===================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Categorias</h1>
+
+        <p>
+
+            Gerencie as categorias utilizadas pelos produtos.
+
+        </p>
+
+    </div>
+
+    <button id="abrirModalCategoria" class="btn btn-primary">
+
+        + Nova Categoria
+
+    </button>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- TOOLBAR -->
+<!-- ===================================== -->
+
+<div class="toolbar">
+
+    <input
+            id="pesquisaCategoria"
+            class="input-field"
+            type="text"
+            placeholder="Pesquisar categoria...">
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- TABELA -->
+<!-- ===================================== -->
+
+<div class="table-wrapper">
+
+    <table class="data-table">
+
+        <thead>
+
+        <tr>
+
+            <th>Nome</th>
+
+            <th>Produtos</th>
+
+            <th>Ações</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="categoria : ${categorias}">
+
+            <td th:text="${categoria.nome}"></td>
+
+            <td th:text="${contagemProdutos.get(categoria.id)}"></td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                            type="button"
+                            class="icon-btn danger btn-excluir-categoria"
+                            th:data-id="${categoria.id}">
+
+                        🗑️
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(categorias)}">
+
+            <td colspan="3">Nenhuma categoria cadastrada.</td>
+
+        </tr>
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- ===================================== -->
+<!-- MODAL NOVA CATEGORIA -->
+<!-- ===================================== -->
+
+<div id="modalCategoria" class="modal-overlay" style="display:none;">
+
+    <div class="modal-box card">
+
+        <h3>Nova Categoria</h3>
+
+        <form id="formCategoria">
+
+            <div class="input-group">
+
+                <label>Nome da Categoria</label>
+
+                <input
+                        id="nomeCategoria"
+                        type="text"
+                        class="input-field"
+                        placeholder="Digite o nome da categoria">
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                        id="fecharModalCategoria"
+                        type="button"
+                        class="btn btn-secondary">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                    Salvar Categoria
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</main>
+
+<!-- ===================================== -->
+<!-- FOOTER -->
+<!-- ===================================== -->
+
+<footer class="app-footer">
+
+    ArenaStock © 2026
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+
+// Botao "+ Nova Categoria" que abre o modal
+const abrirModalCategoria = document.getElementById("abrirModalCategoria");
+// Botao "Cancelar" que fecha o modal
+const fecharModalCategoria = document.getElementById("fecharModalCategoria");
+// A caixa (overlay) do modal inteiro
+const modalCategoria = document.getElementById("modalCategoria");
+// O formulario dentro do modal
+const formCategoria = document.getElementById("formCategoria");
+// Campo de texto com o nome da nova categoria
+const nomeCategoria = document.getElementById("nomeCategoria");
+
+// Quando clica em "+ Nova Categoria"...
+abrirModalCategoria.addEventListener("click", () => {
+    // Limpa o formulario
+    formCategoria.reset();
+    // Mostra o modal
+    modalCategoria.style.display = "flex";
+});
+
+// Quando clica em "Cancelar"...
+fecharModalCategoria.addEventListener("click", () => {
+    // Esconde o modal
+    modalCategoria.style.display = "none";
+});
+
+// Quando clica em qualquer lugar da pagina...
+window.addEventListener("click", function (event) {
+    // Se o clique foi no fundo escurecido (fora da caixa do modal)...
+    if (event.target === modalCategoria) {
+        // Esconde o modal
+        modalCategoria.style.display = "none";
+    }
+});
+
+// Cadastrar nova categoria (usa a API REST ja existente em /api/categorias)
+// Quando o formulario do modal for enviado...
+formCategoria.addEventListener("submit", function (event) {
+    // Impede o comportamento padrao do form (recarregar a pagina inteira)
+    event.preventDefault();
+
+    // Chama a API REST enviando um JSON com o nome digitado
+    fetch("/api/categorias", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome: nomeCategoria.value })
+    })
+    .then(async resposta => {
+        // Se deu certo, recarrega a pagina pra mostrar a categoria nova na lista
+        if (resposta.ok) {
+            window.location.reload();
+        } else {
+            // Se deu erro (nome duplicado, por exemplo), le a mensagem devolvida pela API
+            const erro = await resposta.json();
+            // Mostra a mensagem de erro, ou uma generica se nao vier nenhuma
+            alert(erro.erro || "Não foi possível cadastrar a categoria.");
+        }
+    });
+});
+
+// Excluir categoria
+// Pega todos os botoes de lixeira da tabela de categorias
+document.querySelectorAll(".btn-excluir-categoria").forEach(botao => {
+    // Quando aquele botao especifico for clicado...
+    botao.addEventListener("click", function () {
+        // Le o id da categoria guardado no data-id daquele botao
+        const id = this.dataset.id;
+        // Pede confirmacao antes de excluir de verdade
+        if (confirm("Deseja realmente excluir esta categoria?")) {
+            // Chama a API REST pra apagar a categoria (metodo DELETE)
+            fetch("/api/categorias/" + id, { method: "DELETE" })
+                .then(resposta => {
+                    // Se deu certo, recarrega a pagina
+                    if (resposta.ok) {
+                        window.location.reload();
+                    } else {
+                        // Se deu erro (ex: categoria em uso por algum produto), avisa
+                        alert("Não foi possível excluir a categoria.");
+                    }
+                });
+        }
+    });
+});
+
+// Pesquisar categoria pelo nome
+// Pega o campo de texto de pesquisa da toolbar
+const pesquisaCategoria = document.getElementById("pesquisaCategoria");
+// So continua se o campo realmente existir na pagina
+if (pesquisaCategoria) {
+    // Toda vez que o usuario digita algo no campo de pesquisa...
+    pesquisaCategoria.addEventListener("input", function () {
+        // Pega o texto digitado, tudo em minusculo
+        const termo = this.value.toLowerCase();
+        // Para cada linha da tabela...
+        document.querySelectorAll(".data-table tbody tr").forEach(linha => {
+            // Pega a primeira coluna da linha (nome da categoria)
+            const nomeCelula = linha.querySelector("td");
+            const nomeTexto = nomeCelula ? nomeCelula.textContent.toLowerCase() : "";
+            // Mostra a linha se o nome contem o termo digitado, senao esconde
+            linha.style.display = nomeTexto.includes(termo) ? "" : "none";
+        });
+    });
+}
+
+</script>
+
+</body>
+
+</html>

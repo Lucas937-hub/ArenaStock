@@ -1,0 +1,1479 @@
+/* ==========================================================
+   FONTES
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+
+/* ==========================================================
+   VARIÁVEIS GLOBAIS
+   ========================================================== */
+
+:root {
+
+    /* ========= CORES DE FUNDO ========= */
+
+    --bg: #0a0d0b;
+    --bg2: #0d1210;
+
+    --surface: #121613;
+    --surface2: #1a211c;
+
+    /* ========= BORDAS ========= */
+
+    --border: #202722;
+    --border2: #2c352e;
+
+    /* ========= CORES PRINCIPAIS ========= */
+
+    --rust: #22c55e;
+    --rust-dk: #16a34a;
+    --rust-lt: rgba(34,197,94,.12);
+
+    /* ========= STATUS ========= */
+
+    --green: #22c55e;
+    --green-lt: rgba(34,197,94,.11);
+
+    --red: #ef4444;
+    --red-lt: rgba(239,68,68,.11);
+
+    --amber: #f59e0b;
+    --amber-lt: rgba(245,158,11,.11);
+
+    /* ========= TEXTOS ========= */
+
+    --text: #f3f4f6;
+    --text2: #9ca3af;
+    --muted: #6b7280;
+    --subtle: #454b48;
+
+    /* ========= FONTES ========= */
+
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    /* ========= BORDAS ARREDONDADAS ========= */
+
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 12px;
+
+    /* ========= SOMBRAS ========= */
+
+    --shadow-sm: 0 1px 6px rgba(0,0,0,.30);
+
+    --shadow: 0 2px 16px rgba(0,0,0,.40);
+
+    /* ========= TRANSIÇÕES ========= */
+
+    --t-fast: .12s ease;
+    --t: .20s ease;
+
+}
+
+
+/* ==========================================================
+   RESET
+   ========================================================== */
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+html,
+body{
+
+    height:100%;
+
+}
+
+
+/* ==========================================================
+   BODY
+   ========================================================== */
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:var(--font);
+
+    font-size:.90rem;
+
+    line-height:1.6;
+
+    -webkit-font-smoothing:antialiased;
+
+}
+
+
+/* ==========================================================
+   TIPOGRAFIA
+   ========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    color:var(--text);
+
+    font-weight:600;
+
+    line-height:1.35;
+
+}
+
+h1{
+
+    font-size:2rem;
+
+}
+
+h2{
+
+    font-size:1.55rem;
+
+}
+
+h3{
+
+    font-size:1.20rem;
+
+}
+
+h4{
+
+    font-size:1rem;
+
+}
+
+p{
+
+    color:var(--text2);
+
+}
+
+small{
+
+    color:var(--muted);
+
+}
+
+strong{
+
+    color:var(--text);
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================================
+   LINKS
+   ========================================================== */
+
+a{
+
+    color:var(--rust);
+
+    text-decoration:none;
+
+    transition:color var(--t);
+
+}
+
+a:hover{
+
+    color:var(--rust-dk);
+
+}
+
+
+/* ==========================================================
+   LISTAS
+   ========================================================== */
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+
+/* ==========================================================
+   IMAGENS
+   ========================================================== */
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/* ==========================================================
+   BOTÕES (RESET)
+   ========================================================== */
+
+button{
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    border:none;
+
+    background:none;
+
+}
+
+
+/* ==========================================================
+   CAMPOS (RESET)
+   ========================================================== */
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+    font-size:inherit;
+
+    color:inherit;
+
+}
+
+
+/* ==========================================================
+   SVG
+   ========================================================== */
+
+svg{
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+   ========================================================== */
+
+::-webkit-scrollbar{
+
+    width:6px;
+
+    height:6px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--border2);
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+/* ==========================================================
+   CLASSES UTILITÁRIAS
+   ========================================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.mt-1{
+
+    margin-top:8px;
+
+}
+
+.mt-2{
+
+    margin-top:16px;
+
+}
+
+.mt-3{
+
+    margin-top:24px;
+
+}
+
+.mb-1{
+
+    margin-bottom:8px;
+
+}
+
+.mb-2{
+
+    margin-bottom:16px;
+
+}
+
+.mb-3{
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================================
+   CARDS
+   ========================================================== */
+
+.card{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--r-lg);
+
+    padding:24px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+/* ==========================================================
+   BOTÕES
+   ========================================================== */
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    padding:9px 16px;
+
+    border-radius:var(--r-sm);
+
+    font-size:.87rem;
+
+    font-weight:500;
+
+    font-family:var(--font);
+
+    cursor:pointer;
+
+    transition:all var(--t);
+
+    white-space:nowrap;
+
+}
+
+.btn-primary{
+
+    background:var(--rust);
+
+    color:#0B140D;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--rust-dk);
+
+}
+
+.btn-secondary{
+
+    background:transparent;
+
+    color:var(--text2);
+
+    border:1px solid var(--border2);
+
+}
+
+.btn-secondary:hover{
+
+    background:var(--surface2);
+
+    color:var(--text);
+
+}
+
+.btn-danger{
+
+    background:var(--red);
+
+    color:#FFF;
+
+}
+
+.btn-danger:hover{
+
+    opacity:.90;
+
+}
+
+.btn-block{
+
+    width:100%;
+
+}
+
+.btn:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+}
+
+
+/* ==========================================================
+   FORMULÁRIOS
+   ========================================================== */
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    margin-bottom:14px;
+
+}
+
+.input-group label{
+
+    font-size:.82rem;
+
+    font-weight:500;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   INPUTS
+   ========================================================== */
+
+.input-field{
+
+    width:100%;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--r-sm);
+
+    padding:11px 14px;
+
+    transition:all var(--t);
+
+}
+
+.input-field::placeholder{
+
+    color:var(--subtle);
+
+}
+
+.input-field:focus{
+
+    outline:none;
+
+    border-color:var(--border2);
+
+    box-shadow:0 0 0 2px rgba(34,197,94,.15);
+
+}
+
+select.input-field{
+
+    appearance:none;
+
+    cursor:pointer;
+
+}
+
+textarea.input-field{
+
+    resize:vertical;
+
+    min-height:90px;
+
+}
+
+
+/* ==========================================================
+   LINHAS DE FORMULÁRIO
+   ========================================================== */
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+}
+
+.form-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    margin-top:22px;
+
+}
+
+
+/* ==========================================================
+   BADGES
+   ========================================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    padding:3px 8px;
+
+    border-radius:4px;
+
+    font-size:.75rem;
+
+    font-weight:500;
+
+}
+
+.badge-entrada{
+
+    background:var(--green-lt);
+
+    color:var(--green);
+
+}
+
+.badge-saida{
+
+    background:var(--red-lt);
+
+    color:var(--red);
+
+}
+
+.badge-baixo{
+
+    background:var(--amber-lt);
+
+    color:var(--amber);
+
+}
+
+
+/* ==========================================================
+   ALERTAS
+   ========================================================== */
+
+.alert{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 14px;
+
+    margin-bottom:16px;
+
+    border-radius:var(--r-sm);
+
+    font-size:.84rem;
+
+}
+
+.alert-error{
+
+    background:var(--red-lt);
+
+    color:var(--red);
+
+    border:1px solid rgba(239,68,68,.20);
+
+}
+
+.alert-success{
+
+    background:var(--green-lt);
+
+    color:var(--green);
+
+    border:1px solid rgba(34,197,94,.20);
+
+}
+
+
+/* ==========================================================
+   AVATARES
+   ========================================================== */
+
+.avatar-circle{
+
+    width:32px;
+
+    height:32px;
+
+    border-radius:50%;
+
+    background:var(--surface2);
+
+    border:1px solid var(--border2);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--text2);
+
+    font-size:.75rem;
+
+    font-weight:600;
+
+    text-transform:uppercase;
+
+}
+
+.avatar-circle.avatar-lg{
+
+    width:58px;
+
+    height:58px;
+
+    font-size:1.2rem;
+
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+   ========================================================== */
+
+.empty-state{
+
+    padding:50px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:.88rem;
+
+}
+
+
+/* ==========================================================
+   PERFIL
+   ========================================================== */
+
+.profile-field{
+
+    padding:14px 0;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.profile-field:last-child{
+
+    border:none;
+
+}
+
+.field-label{
+
+    font-size:.76rem;
+
+    color:var(--muted);
+
+    text-transform:uppercase;
+
+    letter-spacing:.04em;
+
+    margin-bottom:4px;
+
+}
+
+.field-value{
+
+    color:var(--text);
+
+    font-size:.9rem;
+
+}
+
+.profile-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+/* ==========================================================
+   LAYOUT PRINCIPAL
+   ========================================================== */
+
+.app-shell{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+.main-area{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+}
+
+.content{
+
+    flex:1;
+
+    padding:28px 32px;
+
+}
+
+.content-narrow{
+
+    max-width:520px;
+
+}
+
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+.sidebar{
+
+    width:220px;
+
+    flex-shrink:0;
+
+    background:var(--bg2);
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:24px 16px;
+
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+
+    overflow-y:auto;
+
+}
+
+.sidebar-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:36px;
+
+    padding:0 6px;
+
+}
+
+.logo-mark{
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:6px;
+
+    background:var(--rust);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.logo-mark svg{
+
+    width:15px;
+
+    height:15px;
+
+    color:#FFF;
+
+}
+
+.brand-name{
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.sidebar-nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2px;
+
+    flex:1;
+
+}
+
+.sidebar-section-label{
+
+    padding:16px 8px 6px;
+
+    color:var(--muted);
+
+    text-transform:uppercase;
+
+    font-size:.70rem;
+
+    letter-spacing:.08em;
+
+}
+
+.sidebar-link{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:8px;
+
+    border-radius:var(--r-sm);
+
+    color:var(--text2);
+
+    transition:all var(--t);
+
+    text-decoration:none;
+
+}
+
+.sidebar-link:hover{
+
+    background:var(--surface);
+
+    color:var(--text);
+
+}
+
+.sidebar-link.active{
+
+    background:var(--rust-lt);
+
+    color:var(--text);
+
+    font-weight:500;
+
+}
+
+.sidebar-link .icon{
+
+    width:16px;
+
+    height:16px;
+
+    flex-shrink:0;
+
+}
+
+.sidebar-footer{
+
+    margin-top:18px;
+
+    padding-top:12px;
+
+    border-top:1px solid var(--border);
+
+}
+
+.sidebar-logout:hover{
+
+    color:var(--red);
+
+    background:var(--red-lt);
+
+}
+
+
+/* ==========================================================
+   TOPBAR
+   ========================================================== */
+
+.topbar{
+
+    height:56px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:0 28px;
+
+    border-bottom:1px solid var(--border);
+
+    background:var(--bg);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+}
+
+.topbar-title{
+
+    color:var(--muted);
+
+    font-size:.88rem;
+
+}
+
+.topbar-title strong{
+
+    color:var(--text);
+
+}
+
+.topbar-search{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    max-width:300px;
+
+    width:100%;
+
+    margin-left:20px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--r-sm);
+
+    padding:0 12px;
+
+}
+
+.topbar-search svg{
+
+    width:14px;
+
+    height:14px;
+
+    color:var(--muted);
+
+}
+
+.topbar-search .input-field{
+
+    border:none;
+
+    background:none;
+
+    padding:8px 0;
+
+}
+
+.topbar-user{
+
+    margin-left:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.user-name{
+
+    font-size:.84rem;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   PAGE HEADER
+   ========================================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    margin-bottom:24px;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.page-header h1{
+
+    font-size:1.45rem;
+
+}
+
+.page-header p{
+
+    font-size:.85rem;
+
+}
+
+
+/* ==========================================================
+   TOOLBAR
+   ========================================================== */
+
+.toolbar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:16px;
+
+}
+
+.toolbar .input-field{
+
+    background:var(--surface);
+
+}
+
+
+/* ==========================================================
+   TABELAS
+   ========================================================== */
+
+.table-wrapper{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--r-lg);
+
+    overflow:hidden;
+
+}
+
+.data-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.data-table thead{
+
+    background:var(--bg2);
+
+}
+
+.data-table th{
+
+    padding:12px 18px;
+
+    text-align:left;
+
+    text-transform:uppercase;
+
+    font-size:.75rem;
+
+    color:var(--muted);
+
+    letter-spacing:.04em;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.data-table td{
+
+    padding:14px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    color:var(--text);
+
+}
+
+.data-table tbody tr:hover{
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.data-table tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+.actions{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+
+/* ==========================================================
+   BOTÕES DE ÍCONES
+   ========================================================== */
+
+.icon-btn{
+
+    width:30px;
+
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:var(--r-sm);
+
+    color:var(--muted);
+
+    transition:all var(--t);
+
+}
+
+.icon-btn:hover{
+
+    background:var(--surface2);
+
+    color:var(--text);
+
+}
+
+.icon-btn.danger:hover{
+
+    color:var(--red);
+
+    background:var(--red-lt);
+
+}
+
+.icon-btn svg{
+
+    width:15px;
+
+    height:15px;
+
+}
+
+
+/* ==========================================================
+   MODAIS
+   ========================================================== */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(0,0,0,.60);
+
+    backdrop-filter:blur(2px);
+
+    z-index:999;
+
+}
+
+.modal-overlay.open{
+
+    display:flex;
+
+}
+
+.modal-box{
+
+    width:420px;
+
+    max-width:90%;
+
+    animation:modalIn .18s ease;
+
+}
+
+.modal-box h3{
+
+    margin-bottom:20px;
+
+}
+
+@keyframes modalIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.app-footer{
+
+    padding:14px 32px;
+
+    border-top:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:.78rem;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:1024px){
+
+    .sidebar{
+
+        width:60px;
+
+    }
+
+    .brand-name,
+
+    .sidebar-section-label,
+
+    .sidebar-link span{
+
+        display:none;
+
+    }
+
+    .sidebar-link{
+
+        justify-content:center;
+
+    }
+
+    .topbar-search{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .content{
+
+        padding:20px;
+
+    }
+
+    .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@media (max-width:640px){
+
+    .topbar{
+
+        padding:0 16px;
+
+    }
+
+    .content{
+
+        padding:16px;
+
+    }
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}

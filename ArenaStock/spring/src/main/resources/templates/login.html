@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Entrar</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+
+    <link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <div class="login-wrap">
+
+            <!-- Lado esquerdo -->
+
+            <section class="login-side">
+
+                <div class="side-logo">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                            <path d="M2 17l10 5 10-5"/>
+
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">
+
+                        ArenaStock
+
+                    </span>
+
+                </div>
+
+                <div class="side-copy">
+
+                    <h2>
+
+                        Controle de estoque para equipamentos esportivos
+
+                    </h2>
+
+                    <p>
+
+                        Gerencie entradas, saídas e categorias em um só lugar.
+                        Simples, rápido e seguro.
+
+                    </p>
+
+                </div>
+
+                <div class="side-features">
+
+                    <div class="feature-row">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.5">
+
+                            <polyline points="20 6 9 17 4 12"/>
+
+                        </svg>
+
+                        Controle de entradas e saídas
+
+                    </div>
+
+                    <div class="feature-row">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.5">
+
+                            <polyline points="20 6 9 17 4 12"/>
+
+                        </svg>
+
+                        Alertas de estoque baixo
+
+                    </div>
+
+                    <div class="feature-row">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.5">
+
+                            <polyline points="20 6 9 17 4 12"/>
+
+                        </svg>
+
+                        Histórico completo de movimentações
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Lado direito -->
+
+            <section class="login-form-area">
+
+                <div class="form-heading">
+
+                    <h1>Bem-vindo de volta</h1>
+
+                    <p>
+
+                        Entre com suas credenciais.
+
+                    </p>
+
+                </div>
+
+                <p th:if="${param.erro}"
+                   style="color:#e5484d;margin-bottom:16px;">
+
+                    Usuário ou senha inválidos.
+
+                </p>
+
+                <form th:action="@{/login}" method="post">
+
+                    <div class="input-group">
+
+                        <label for="usuario">
+
+                            Usuário
+
+                        </label>
+
+                        <input id="usuario"
+                        name="login"
+                        type="text"
+                        class="input-field"
+                        required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="senha">
+
+                            Senha
+
+                        </label>
+
+                        <input id="senha"
+                        name="senha"
+                        type="password"
+                        class="input-field"
+                        required>
+
+                    </div>
+
+                    <button class="btn btn-primary btn-block">
+
+                        Entrar
+
+                    </button>
+
+                </form>
+
+                <div class="login-footer-link">
+
+                    Ainda não possui conta?
+
+                    <a th:href="@{/cadastro-usuario}">
+
+                        Criar conta
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
