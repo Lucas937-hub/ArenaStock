@@ -76,12 +76,14 @@ public ResponseEntity<?> cadastrar(
                     .body(Map.of("erro", "Voce precisa estar logado para cadastrar um produto."));
         }
 
-        // Chama o service pra cadastrar de fato
+        // Chama o service pra cadastrar de fato, passando o IP de origem
+        // (usado apenas para deixar registrado no log de auditoria)
         Produto salvo =
         produtoService.cadastrar(
                 produto,
                 categoriaId,
-                usuarioLogado);
+                usuarioLogado,
+                request.getRemoteAddr());
         // Devolve 201 (Created) com o produto salvo no corpo da resposta
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
@@ -128,13 +130,14 @@ public ResponseEntity<?> listar(HttpServletRequest request){
                                         @Valid @RequestBody Produto dadosNovos,
                                         HttpServletRequest request) {
         // Sem login -> bloqueia com 401
-        if (obterUsuarioLogado(request) == null) {
+        Usuario usuarioLogado = obterUsuarioLogado(request);
+        if (usuarioLogado == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("erro", "Voce precisa estar logado para atualizar um produto."));
         }
         try {
-            // Devolve 200 (OK) com o produto ja atualizado
-            return ResponseEntity.ok(produtoService.atualizar(id, dadosNovos));
+            // Devolve 200 (OK) com o produto ja atualizado (usuario e IP vao pro log de auditoria)
+            return ResponseEntity.ok(produtoService.atualizar(id, dadosNovos, usuarioLogado, request.getRemoteAddr()));
         } catch (RuntimeException e) {
             // Produto nao encontrado -> devolve 404
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("erro", e.getMessage()));
@@ -145,13 +148,15 @@ public ResponseEntity<?> listar(HttpServletRequest request){
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remover(@PathVariable Long id, HttpServletRequest request) {
         // Sem login -> bloqueia com 401
-        if (obterUsuarioLogado(request) == null) {
+        Usuario usuarioLogado = obterUsuarioLogado(request);
+        if (usuarioLogado == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("erro", "Voce precisa estar logado para remover um produto."));
         }
         try {
-            // Remove o produto do banco
-            produtoService.remover(id);
+            // Remove o produto do banco (usuario e IP ficam registrados no log de auditoria,
+            // exatamente o que garante saber quem excluiu o quê, mesmo depois do fato)
+            produtoService.remover(id, usuarioLogado, request.getRemoteAddr());
             // Devolve 204 (No Content) - deu certo, sem corpo de resposta
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
@@ -160,4 +165,3 @@ public ResponseEntity<?> listar(HttpServletRequest request){
         }
     }
 }
-

@@ -97,11 +97,13 @@ public String cadastrarProduto(@ModelAttribute Produto produto,
         return "redirect:/login";
     }
 
-    // Chama o service passando o produto, o id da categoria escolhida e o usuario logado
+    // Chama o service passando o produto, o id da categoria escolhida, o usuario logado
+    // e o IP de origem (os dois ultimos vao pro log de auditoria)
     produtoService.cadastrar(
             produto,
             produto.getCategoria().getId(),
-            usuario);
+            usuario,
+            request.getRemoteAddr());
 
     // Volta pra tela de produtos, ja com o novo produto na lista
     return "redirect:/produtos";
@@ -130,8 +132,9 @@ public String editarProduto(@PathVariable Long id,
         return "redirect:/login";
     }
 
-    // Chama o service passando o id do produto e os dados novos
-    produtoService.atualizar(id, produto);
+    // Chama o service passando o id do produto, os dados novos, o usuario logado
+    // e o IP de origem (os dois ultimos vao pro log de auditoria)
+    produtoService.atualizar(id, produto, usuario, request.getRemoteAddr());
 
     // Volta pra tela de produtos, ja com os dados atualizados
     return "redirect:/produtos";

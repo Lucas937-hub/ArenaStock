@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.arenastock.spring.model.Categoria;
+import com.arenastock.spring.model.Usuario;
 import com.arenastock.spring.service.CategoriaService;
 
+// Requisicao HTTP (usada pra acessar a sessao e o IP de origem)
+import jakarta.servlet.http.HttpServletRequest;
+// Sessao do navegador (guarda quem esta logado)
+import jakarta.servlet.http.HttpSession;
 // Ativa as validacoes do model
 import jakarta.validation.Valid;
 import java.util.List;
@@ -36,12 +41,29 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
 
-    // POST /api/categorias -> cadastra uma nova categoria
+    // Metodo auxiliar: busca o usuario guardado na sessao, ou null se ninguem logado
+    private Usuario obterUsuarioLogado(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return null;
+        }
+        return (Usuario) session.getAttribute("usuarioLogado");
+    }
+
+    // POST /api/categorias -> cadastra uma nova categoria (exige login)
     @PostMapping
-    public ResponseEntity<?> cadastrar(@Valid @RequestBody Categoria categoria) {
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody Categoria categoria, HttpServletRequest request) {
+        // Confere se tem alguem logado na sessao. Antes esta checagem nao existia,
+        // permitindo criar categorias sem identificar quem fez isso.
+        Usuario usuarioLogado = obterUsuarioLogado(request);
+        if (usuarioLogado == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("erro", "Voce precisa estar logado para cadastrar uma categoria."));
+        }
         try {
-            // Devolve 201 (Created) com a categoria salva
-            return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.cadastrar(categoria));
+            // Devolve 201 (Created) com a categoria salva (usuario e IP vao pro log de auditoria)
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(categoriaService.cadastrar(categoria, usuarioLogado, request.getRemoteAddr()));
         } catch (RuntimeException e) {
             // Nome duplicado -> devolve 400 (Bad Request) com a mensagem de erro
             return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
@@ -55,12 +77,19 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.listarTodas());
     }
 
-    // DELETE /api/categorias/{id} -> remove uma categoria pelo id
+    // DELETE /api/categorias/{id} -> remove uma categoria pelo id (exige login)
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> remover(@PathVariable Long id) {
+    public ResponseEntity<?> remover(@PathVariable Long id, HttpServletRequest request) {
+        // Confere se tem alguem logado na sessao. Antes esta checagem nao existia,
+        // permitindo excluir categorias sem identificar quem fez isso.
+        Usuario usuarioLogado = obterUsuarioLogado(request);
+        if (usuarioLogado == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("erro", "Voce precisa estar logado para remover uma categoria."));
+        }
         try {
-            // Remove a categoria do banco
-            categoriaService.remover(id);
+            // Remove a categoria do banco (usuario e IP vao pro log de auditoria)
+            categoriaService.remover(id, usuarioLogado, request.getRemoteAddr());
             // Devolve 204 (No Content) - deu certo, sem corpo de resposta
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
