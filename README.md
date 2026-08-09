@@ -35,7 +35,7 @@ Pequenos e médios negócios que trabalham com produtos esportivos (lojas, acade
 O banco de dados é composto pelas seguintes entidades principais:
 
 - `usuarios` — dados de acesso e perfil (cargo)de cada usuario.
-- `prrodutos` — nome, quantidade, preço, vinculado a uma categoria e a um usuário responsável.
+- `produtos` — nome, quantidade, preço, vinculado a uma categoria e a um usuário responsável.
 - `categorias` — agrupamento dos produtos.
 - `movimentacoes` — histórico de entradas e saídas de estoque, vinculado a um produto e a um usuário.
 - `logs_auditoria` — histórico de ações (criação/atualização/exclusão) realizadas sobre produtos, categorias e movimentações, preservando quem fez cada ação mesmo que o usuario original seja excluído do sistema.
