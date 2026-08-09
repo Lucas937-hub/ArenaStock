@@ -17,7 +17,7 @@ Pequenos e médios negócios que trabalham com produtos esportivos (lojas, acade
 
 - Rastreabilidade completa de quem fez cada ação no sistema (auditoria);
 
-- Controle de acesso por perfil de usúario.
+- Controle de acesso por perfil de usuário.
 
 ### 🚀 Funcionalidades atuais
 
@@ -34,7 +34,7 @@ Pequenos e médios negócios que trabalham com produtos esportivos (lojas, acade
 
 O banco de dados é composto pelas seguintes entidades principais:
 
-- `usuarios` — dados de acesso e perfil (cargo)de cada usuario.
+- `usuarios` — dados de acesso e perfil (cargo) de cada usuário.
 - `produtos` — nome, quantidade, preço, vinculado a uma categoria e a um usuário responsável.
 - `categorias` — agrupamento dos produtos.
 - `movimentacoes` — histórico de entradas e saídas de estoque, vinculado a um produto e a um usuário.
