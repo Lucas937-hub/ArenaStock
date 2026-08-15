@@ -1,0 +1,217 @@
+/* ==========================================================
+   AUDITORIA
+   ========================================================== */
+
+
+/* ==========================================================
+   HEADER DA PÁGINA
+   ========================================================== */
+
+.page-header{
+
+    margin-bottom:26px;
+
+}
+
+.page-header h1{
+
+    font-size:1.55rem;
+
+    letter-spacing:-.03em;
+
+}
+
+.page-header p{
+
+    margin-top:6px;
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   TOOLBAR
+   ========================================================== */
+
+.toolbar{
+
+    margin-bottom:22px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.toolbar input[type="text"]{
+
+    width:280px;
+
+}
+
+.toolbar select{
+
+    width:200px;
+
+}
+
+
+/* ==========================================================
+   TABELA
+   ========================================================== */
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+.data-table{
+
+    min-width:1080px;
+
+}
+
+.data-table tbody tr{
+
+    transition:background .15s ease;
+
+}
+
+.data-table tbody tr:hover{
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.data-table tbody td{
+
+    vertical-align:middle;
+
+}
+
+/* Data/hora em fonte monoespaçada, como no resto do sistema */
+.data-table tbody td:first-child{
+
+    font-family:var(--mono);
+
+    color:var(--text2);
+
+    white-space:nowrap;
+
+}
+
+/* Coluna de descrição pode ter texto mais longo */
+.data-table td.descricao-auditoria{
+
+    max-width:420px;
+
+    white-space:normal;
+
+    line-height:1.4;
+
+    color:var(--text2);
+
+}
+
+/* Coluna de IP, discreta */
+.data-table td.ip-auditoria{
+
+    font-family:var(--mono);
+
+    color:var(--subtle);
+
+    font-size:.8rem;
+
+}
+
+
+/* ==========================================================
+   BADGES DE AÇÃO
+   ========================================================== */
+
+.badge-criacao{
+
+    background:var(--green-lt);
+
+    color:var(--green);
+
+}
+
+.badge-atualizacao{
+
+    background:var(--amber-lt);
+
+    color:var(--amber);
+
+}
+
+.badge-exclusao{
+
+    background:var(--red-lt);
+
+    color:var(--red);
+
+}
+
+
+/* ==========================================================
+   ESTADO VAZIO
+   ========================================================== */
+
+.empty-state{
+
+    padding:70px 30px;
+
+}
+
+.empty-state h3{
+
+    margin-bottom:10px;
+
+    font-size:1.15rem;
+
+}
+
+.empty-state p{
+
+    color:var(--text2);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width:900px){
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .toolbar input,
+    .toolbar select{
+
+        width:100%;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+}

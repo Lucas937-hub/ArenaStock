@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ArenaStock | Auditoria</title>
+
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+
+    <link rel="stylesheet" th:href="@{/css/dashboard-layout.css}">
+
+    <link rel="stylesheet" th:href="@{/css/auditoria.css}">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="sidebar-brand">
+
+                <a th:href="@{/dashboard}">
+
+                    <div class="logo-mark">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2.2">
+
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+
+                            <path d="M2 17l10 5 10-5"/>
+
+                            <path d="M2 12l10 5 10-5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <span class="brand-name">
+                        ArenaStock
+                    </span>
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="sidebar-section-label">
+                    Principal
+                </div>
+
+                <a class="sidebar-link"
+                   th:href="@{/dashboard}">
+
+                    <span class="icon">🏠</span>
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/produtos}">
+
+                    <span class="icon">📦</span>
+                    <span>Produtos</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/categorias}">
+
+                    <span class="icon">🗂️</span>
+                    <span>Categorias</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/movimentacoes}">
+
+                    <span class="icon">🔄</span>
+                    <span>Movimentações</span>
+
+                </a>
+
+                <!-- Link exclusivo para administradores. Como esta pagina so e -->
+                <!-- alcancada por quem tem cargo ADMINISTRADOR (o controller barra -->
+                <!-- qualquer outro perfil), o link so aparece pra quem ja esta aqui. -->
+                <a class="sidebar-link active"
+                   th:href="@{/auditoria}">
+
+                    <span class="icon">🛡️</span>
+                    <span>Auditoria</span>
+
+                </a>
+
+                <a class="sidebar-link"
+                   th:href="@{/perfil}">
+
+                    <span class="icon">👤</span>
+                    <span>Perfil</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <a class="sidebar-link sidebar-logout"
+               th:href="@{/logout}">
+
+                <span class="icon">🚪</span>
+                <span>Sair</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ===================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ===================================== -->
+
+    <div class="main-area">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+                Log de
+                <strong>Auditoria</strong>
+            </div>
+
+            <div class="topbar-search">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+
+                    <circle cx="11" cy="11" r="8"/>
+
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+
+                </svg>
+
+                <input
+                        id="pesquisaAuditoria"
+                        class="input-field"
+                        type="text"
+                        placeholder="Pesquisar por usuário ou descrição...">
+
+            </div>
+
+            <div class="topbar-user">
+
+                <div class="avatar-circle"
+                     th:text="${#strings.substring(usuarioLogado.nome,0,1)}">
+                </div>
+
+                <span class="user-name"
+                      th:text="${usuarioLogado.nome}">
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- CONTEÚDO -->
+
+        <main class="content">
+
+            <!-- ===================================== -->
+            <!-- HEADER DA PÁGINA -->
+            <!-- ===================================== -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>Auditoria</h1>
+
+                    <p>
+                        Histórico completo de quem fez o quê no sistema — cadastros,
+                        edições e exclusões de produtos, categorias e movimentações.
+                        Visível apenas para administradores.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- TOOLBAR -->
+            <!-- ===================================== -->
+
+            <div class="toolbar">
+
+                <select id="filtroAcao" class="input-field">
+
+                    <option value="">Todas as Ações</option>
+                    <option value="CRIACAO">Criação</option>
+                    <option value="ATUALIZACAO">Atualização</option>
+                    <option value="EXCLUSAO">Exclusão</option>
+
+                </select>
+
+                <select id="filtroEntidade" class="input-field">
+
+                    <option value="">Todas as Entidades</option>
+                    <option value="PRODUTO">Produto</option>
+                    <option value="CATEGORIA">Categoria</option>
+                    <option value="MOVIMENTACAO">Movimentação</option>
+
+                </select>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- TABELA -->
+            <!-- ===================================== -->
+
+            <div class="table-wrapper">
+
+                <table class="data-table">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Data/Hora</th>
+                        <th>Responsável</th>
+                        <th>Ação</th>
+                        <th>Entidade</th>
+                        <th>Descrição</th>
+                        <th>IP de Origem</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="log : ${logs}"
+                        th:data-acao="${log.acao}"
+                        th:data-entidade="${log.entidade}">
+
+                        <td th:text="${#temporals.format(log.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></td>
+
+                        <!-- Mostra o nome "fotografado" no momento da acao, nao o -->
+                        <!-- nome atual do usuario -- garante que o registro continue -->
+                        <!-- correto mesmo se a conta for renomeada ou excluida depois -->
+                        <td th:text="${log.usuarioNomeSnapshot} + ' (' + ${log.usuarioLoginSnapshot} + ')'"></td>
+
+                        <td>
+
+                            <span th:if="${log.acao.name() == 'CRIACAO'}"
+                                  class="badge badge-criacao">Criação</span>
+
+                            <span th:if="${log.acao.name() == 'ATUALIZACAO'}"
+                                  class="badge badge-atualizacao">Atualização</span>
+
+                            <span th:if="${log.acao.name() == 'EXCLUSAO'}"
+                                  class="badge badge-exclusao">Exclusão</span>
+
+                        </td>
+
+                        <td th:text="${log.entidade.name()}"></td>
+
+                        <td class="descricao-auditoria" th:text="${log.descricao}"></td>
+
+                        <td class="ip-auditoria" th:text="${log.ipOrigem} ?: '—'"></td>
+
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(logs)}">
+
+                        <td colspan="6">Nenhum registro de auditoria encontrado ainda.</td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </main>
+
+        <!-- ===================================== -->
+        <!-- FOOTER -->
+        <!-- ===================================== -->
+
+        <footer class="app-footer">
+            ArenaStock © 2026
+        </footer>
+
+    </div>
+
+</div>
+
+<script>
+
+// Pesquisa por texto (usuário ou descrição)
+const pesquisaAuditoria = document.getElementById("pesquisaAuditoria");
+const filtroAcao = document.getElementById("filtroAcao");
+const filtroEntidade = document.getElementById("filtroEntidade");
+
+// Aplica os três filtros (texto, ação, entidade) juntos sobre a tabela
+function aplicarFiltrosAuditoria() {
+
+    const termo = pesquisaAuditoria.value.toLowerCase();
+    const acao = filtroAcao.value;
+    const entidade = filtroEntidade.value;
+
+    document.querySelectorAll(".data-table tbody tr").forEach(linha => {
+
+        // Ignora a linha de "nenhum registro encontrado" (nao tem data-acao)
+        if (!linha.dataset.acao) {
+            return;
+        }
+
+        const texto = linha.textContent.toLowerCase();
+        const bateTexto = texto.includes(termo);
+        const bateAcao = !acao || linha.dataset.acao === acao;
+        const bateEntidade = !entidade || linha.dataset.entidade === entidade;
+
+        linha.style.display = (bateTexto && bateAcao && bateEntidade) ? "" : "none";
+    });
+}
+
+pesquisaAuditoria.addEventListener("input", aplicarFiltrosAuditoria);
+filtroAcao.addEventListener("change", aplicarFiltrosAuditoria);
+filtroEntidade.addEventListener("change", aplicarFiltrosAuditoria);
+
+</script>
+
+</body>
+
+</html>
