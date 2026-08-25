@@ -61,7 +61,7 @@ public class MovimentacaoController {
         }
         try {
             // Chama o service, que atualiza o estoque e salva a movimentacao
-            Movimentacao salva = movimentacaoService.registrar(movimentacao, usuarioLogado);
+            Movimentacao salva = movimentacaoService.registrar(movimentacao, usuarioLogado, request.getRemoteAddr());
             // Devolve 201 (Created) com a movimentacao salva
             return ResponseEntity.status(HttpStatus.CREATED).body(salva);
         } catch (RuntimeException e) {

@@ -105,6 +105,16 @@
 
                 </a>
 
+
+                <a class="sidebar-link"
+                    th:href="@{/auditoria}"
+                    th:if="${usuarioLogado != null and usuarioLogado.cargo == 'ADMINISTRADOR'}">
+                
+                    <span class="icon">📋</span>
+                    <span>Auditoria</span>
+
+                </a>
+
                 <a class="sidebar-link"
                    th:href="@{/perfil}">
 
