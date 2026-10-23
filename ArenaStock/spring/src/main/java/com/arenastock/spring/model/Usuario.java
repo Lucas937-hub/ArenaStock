@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 // Lombok: gera getters/setters/equals/hashCode/toString sozinho
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
@@ -54,6 +55,9 @@ public class Usuario {
 
     // Nao pode ficar vazia
     @NotBlank(message = "A senha é obrigatória.")
+    //WRITE_ONLY: o Jackson aceita este campo ao LER ao JSON de entrada,
+    // mas nunca o inclui ao ESCREVER um JSON de saída. 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     // Obrigatoria no banco (guardada em texto puro neste projeto)
     @Column(nullable = false, length = 100)
     private String senha;
