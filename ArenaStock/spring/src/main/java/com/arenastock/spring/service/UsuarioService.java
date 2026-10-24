@@ -4,16 +4,20 @@ import com.arenastock.spring.model.Usuario;
 import com.arenastock.spring.repository.UsuarioRepository;
 // Marca a classe como um "servico" (regra de negocio), gerenciado pelo Spring
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UsuarioService {
 
     // Dependencia do repositorio, injetada pelo Spring via construtor
     private final UsuarioRepository usuarioRepository;
+    // Ferramenta que gera e confere hashes BCrypt (entregu pelo Spring)
+    private final PasswordEncoder passwordEncoder;
 
     // Construtor: o Spring cria o UsuarioService ja passando o repositorio pronto
-    public UsuarioService(UsuarioRepository usuarioRepository){
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder){
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Regra de negocio: cadastrar um novo usuario
@@ -31,7 +35,8 @@ public class UsuarioService {
             throw new RuntimeException("Este e-mail já está cadastrado.");
         }
 
-        // Se passou pelas duas checagens, salva o usuario no banco
+        // Guarda apenas o hash, nunca a senha original
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
@@ -42,11 +47,10 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByLogin(login)
         .orElseThrow(() -> new RuntimeException("Login ou senha invalidos"));
 
-        // Compara a senha digitada com a senha salva (texto puro, sem criptografia)
-        if (!usuario.getSenha().equals(senha)){
-            // Mesma mensagem generica de erro (nao revela se foi o login ou a senha que errou)
-            throw new RuntimeException("Login ou senha invalidos");
-        }
+       // matches() aplica o hash na senha digitada e compara com o hash salvo
+       if (!passwordEncoder.matches(senha, usuario.getSenha())){
+        throw new RuntimeException("Login ou senha invalidos");
+       }
 
         // Se a senha bateu, devolve o usuario autenticado
         return usuario;

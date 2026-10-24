@@ -58,6 +58,7 @@ public class Usuario {
     //WRITE_ONLY: o Jackson aceita este campo ao LER ao JSON de entrada,
     // mas nunca o inclui ao ESCREVER um JSON de saída. 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    
     // Obrigatoria no banco (guardada em texto puro neste projeto)
     @Column(nullable = false, length = 100)
     private String senha;
